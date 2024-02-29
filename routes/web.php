@@ -29,12 +29,23 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    // Route::get('/dashboard', function () {
-    //     return view('admin.category.list');
-    // })->name('dashboard');
+    
+    //dashboard 
+    Route::get('dashboard',[AuthController::class,'dashboard'])->name('dashboard');
+
+    //admin
     //category
-    Route::group(['prefix'=>'category'],function(){
+    Route::group(['prefix'=>'category','middleware'=>'admin_auth'],function(){
         Route::get('list',[CategoryController::class,'list'])->name('category#list');
+    });
+
+    //user
+    //home
+    Route::group(['prefix'=>'user','middleware'=>'user_auth'],function(){
+        Route::get('home',function(){
+            return "User Home Page";
+            return view('user.home');
+        })->name('user#home');
     });
 });
 
