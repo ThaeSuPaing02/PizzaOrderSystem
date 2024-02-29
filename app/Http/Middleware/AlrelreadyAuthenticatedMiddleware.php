@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class AdminAuthMiddleware
+class AlrelreadyAuthenticatedMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,12 +16,12 @@ class AdminAuthMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::user()->role == 'user'){
-            abort('404');
+        if(Auth::check() && Auth::user()->role == 'admin'){
+            return redirect()->route('category#list');
         }
-    //     if($request->route()->named('auth#loginPage') && Auth::check()){
-    //      return redirect()->route('category#list');
-    //    } 
+        if(Auth::check() && Auth::user()->role == 'user'){
+            return redirect()->route('user#home');
+        }
         return $next($request);
     }
 }

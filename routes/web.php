@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Middleware\AlrelreadyAuthenticatedMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,15 +22,14 @@ use App\Http\Controllers\CategoryController;
 
 //login , register
 Route::redirect('/','loginPage');
-Route::get('loginPage',[AuthController::class,'loginPage'])->name('auth#loginPage');
-Route::get('registerPage',[AuthController::class,'registerPage'])->name('auth#registerPage');
+Route::get('loginPage',[AuthController::class,'loginPage'])->name('auth#loginPage')->middleware(AlrelreadyAuthenticatedMiddleware::class);
+Route::get('registerPage',[AuthController::class,'registerPage'])->name('auth#registerPage')->middleware(AlrelreadyAuthenticatedMiddleware::class);
 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    
     //dashboard 
     Route::get('dashboard',[AuthController::class,'dashboard'])->name('dashboard');
 
@@ -43,14 +43,10 @@ Route::middleware([
     //home
     Route::group(['prefix'=>'user','middleware'=>'user_auth'],function(){
         Route::get('home',function(){
-            return "User Home Page";
+           // return "User Home Page";
             return view('user.home');
         })->name('user#home');
     });
 });
 
-//admin 
 
-
-
-//user

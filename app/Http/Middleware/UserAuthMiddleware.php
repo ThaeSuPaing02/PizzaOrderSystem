@@ -16,9 +16,18 @@ class UserAuthMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::user()->role == 'admin'){
-            abort(404);
+       
+
+        // Check if the authenticated user is an admin
+        if (Auth::user()->role == 'admin') {
+            // If the user is an admin, abort with a 404 error
+            abort(404, 'Unauthorized');
         }
+        // if($request->route()->named('auth#loginPage') && Auth::check()){
+        //     return redirect()->route('user#home');
+        //   } 
+
+        // Allow authenticated users with the role of user to proceed
         return $next($request);
     }
 }

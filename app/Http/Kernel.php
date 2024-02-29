@@ -5,6 +5,7 @@ namespace App\Http;
 use App\Http\Middleware\UserAuthMiddleware;
 use App\Http\Middleware\AdminAuthMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use App\Http\Middleware\AlrelreadyAuthenticatedMiddleware;
 
 class Kernel extends HttpKernel
 {
@@ -68,5 +69,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin_auth' => AdminAuthMiddleware::class,
         'user_auth' => UserAuthMiddleware::class,
+        'already_auth'=>AlrelreadyAuthenticatedMiddleware::class,
     ];
 }
