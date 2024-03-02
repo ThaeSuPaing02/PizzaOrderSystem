@@ -19,10 +19,6 @@
                         <form action="{{route('category#create')}}" method="post">
                             @csrf
                             <div class="form-group">
-                                <label for="cc-payment" class="control-label mb-1">Category ID</label>
-                                <input id="cc-pament" name="id" type="text" class="form-control" aria-required="true" aria-invalid="false" disabled>
-                            </div>
-                            <div class="form-group">
                                 <label for="cc-payment" class="control-label mb-1">Category Name</label>
                                 <input id="cc-pament" name="name" type="text" class="form-control" aria-required="true" aria-invalid="false">
                             </div>

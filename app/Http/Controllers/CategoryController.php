@@ -22,7 +22,7 @@ class CategoryController extends Controller
     public function create(Request $request){
        // dd($request->all());
        Category::create($request->all());
-       return redirect()->route('category#list');
+       return redirect()->route('category#list')->with(['message'=>'Category created!']);
     }
 
     //show edit page
@@ -35,13 +35,13 @@ class CategoryController extends Controller
     public function edit(Request $request){
        // dd($id);
        Category::where('id',$request->id)->update(['name'=>$request->name]);
-       return redirect()->route('category#list');
+       return redirect()->route('category#list')->with(['message'=>'Category Edited!']);
     }
 
     //delete category
     public function delete($id){
         Category::destroy($id);
-        return redirect()->route('category#list');
+        return redirect()->route('category#list')->with(['message'=>'Category Deleted!']);
     }
 
 }
