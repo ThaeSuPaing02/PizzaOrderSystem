@@ -4,6 +4,14 @@
 <div class="main-content">
     <div class="section__content section__content--p30">
         <div class="container-fluid">
+            @if($errors->any())
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            @foreach ($errors->all() as $error)
+                            {{ $error }}
+                            @endforeach
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+            @endif
             <div class="row">
                 <div class="col-3 offset-8">
                     <a href="category_list.html"><button class="btn bg-dark text-white my-3">List</button></a>

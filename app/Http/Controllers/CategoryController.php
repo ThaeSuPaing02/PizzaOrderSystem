@@ -20,9 +20,16 @@ class CategoryController extends Controller
 
     //create category 
     public function create(Request $request){
+        $request->validate([
+            'name'=>'required| unique:categories,| max:50'
+        ]);
        // dd($request->all());
-       Category::create($request->all());
-       return redirect()->route('category#list')->with(['message'=>'Category created!']);
+       try{
+        Category::create($request->all());
+        return redirect()->route('category#list')->with(['message'=>'Category created!']);
+       }catch(Exception $e){
+            return redirect()->back()->withInput()->withErrors(['error'=>$e->getMessage()]);
+       }
     }
 
     //show edit page
@@ -34,6 +41,9 @@ class CategoryController extends Controller
     //edit category
     public function edit(Request $request){
        // dd($id);
+       $request->validate([
+        'name'=>'required| max:50| unique:categories,name,'.$request->id
+        ]);
        Category::where('id',$request->id)->update(['name'=>$request->name]);
        return redirect()->route('category#list')->with(['message'=>'Category Edited!']);
     }
