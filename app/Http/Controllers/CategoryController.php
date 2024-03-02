@@ -9,7 +9,10 @@ class CategoryController extends Controller
 {
     //show category list page
     public function list(){
-        $categories = Category::orderBy('id','desc')->paginate(4);
+        $categories = Category::when(request('key'),function($query){
+            $query->where('name','like','%'.request('key').'%');
+        })->
+        orderBy('id','desc')->paginate(4);
         return view('admin.category.list',compact('categories'));
     }
     

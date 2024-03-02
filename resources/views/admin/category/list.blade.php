@@ -41,7 +41,23 @@
                                     <th>actions</th>
                                 </tr>
                             </thead>
-                            <h4>Total Category - {{$categories->total()}}</h4>
+                            <div class="row">
+                                <div class="col-3">
+                                    <h5>Total - {{$categories->total()}}</h5>
+                                </div>
+                                <div class="col-3">
+                                    <h5>Search key - <span class="text-danger">{{request('key')}}</span></h5>
+                                </div>
+                                <div class="col-4 offset-2 my-3">
+                                    <div class="d-flex gap-2">
+                                        <form action="{{route('category#list')}}" class="" method="get">
+                                            @csrf
+                                            <input type="text" name="key" class="form-control" placeholder="Search" value="{{request('key')}}">
+                                            <input type="submit" value="Search" class="btn btn-dark">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                             @if (count($categories) == 0)
                                 <tbody>
                                     <tr>
@@ -77,7 +93,7 @@
                             @endif
                         </table>
                         <div class="">
-                        {{$categories->links()}}
+                        {{$categories->appends(request()->query())->links()}}
                         </div>
                     </div>
                     <!-- END DATA TABLE -->
