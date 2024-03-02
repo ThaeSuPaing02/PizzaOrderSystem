@@ -41,6 +41,16 @@
                                     <th>actions</th>
                                 </tr>
                             </thead>
+                            <h4>Total Category - {{$categories->total()}}</h4>
+                            @if (count($categories) == 0)
+                                <tbody>
+                                    <tr>
+                                        <td colspan="5">
+                                            <h3>There is no category yet.</h3>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            @else
                             <tbody>
                                 @foreach ($categories as $category)
                                 <tr class="tr-shadow">
@@ -50,9 +60,6 @@
                                     <td>{{$category->updated_at->format('d-m-Y')}}</td>
                                     <td class="d-flex">
                                         <div class="table-data-feature">
-                                            <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
-                                                <i class="zmdi zmdi-mail-send"></i>
-                                            </button>
                                             <a href="{{route('category#editPage',['id'=>$category->id])}}" class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                                 <i class="zmdi zmdi-edit"></i>
                                             </a>
@@ -67,7 +74,11 @@
                                 </tr>
                                 @endforeach
                             </tbody>
+                            @endif
                         </table>
+                        <div class="">
+                        {{$categories->links()}}
+                        </div>
                     </div>
                     <!-- END DATA TABLE -->
                 </div>

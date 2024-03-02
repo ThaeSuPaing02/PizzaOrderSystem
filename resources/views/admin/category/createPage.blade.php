@@ -28,7 +28,7 @@
                             @csrf
                             <div class="form-group">
                                 <label for="cc-payment" class="control-label mb-1">Category Name</label>
-                                <input id="cc-pament" name="name" type="text" class="form-control" aria-required="true" aria-invalid="false">
+                                <input id="cc-pament" name="name" type="text" class="form-control" aria-required="true" aria-invalid="false" autofocus>
                             </div>
                             <div>
                                 <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">

@@ -9,7 +9,7 @@ class CategoryController extends Controller
 {
     //show category list page
     public function list(){
-        $categories = Category::all();
+        $categories = Category::orderBy('id','desc')->paginate(4);
         return view('admin.category.list',compact('categories'));
     }
     
@@ -21,7 +21,7 @@ class CategoryController extends Controller
     //create category 
     public function create(Request $request){
         $request->validate([
-            'name'=>'required| unique:categories,| max:50'
+            'name'=>'required| unique:categories| max:50'
         ]);
        // dd($request->all());
        try{
