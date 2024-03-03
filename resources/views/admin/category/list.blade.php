@@ -1,4 +1,5 @@
 @extends('admin.layouts.app')
+@section('pageTitle','Category List Page')
 @section('content')
     <!-- MAIN CONTENT-->
     <div class="main-content mr-4">

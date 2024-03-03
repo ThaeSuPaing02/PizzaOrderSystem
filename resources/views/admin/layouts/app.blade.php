@@ -35,6 +35,9 @@
     {{-- bootstrap cdn link --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    {{-- font awesome cdn link --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body class="animsition">
@@ -45,12 +48,7 @@
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="header-wrap">
-                            <form class="form-header" action="" method="POST">
-                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
-                                <button class="au-btn--submit" type="submit">
-                                    <i class="zmdi zmdi-search"></i>
-                                </button>
-                            </form>
+                            <h4>@yield('pageTitle')</h4>
                             <div class="header-button">
                                 <div class="noti-wrap">
                                     <div class="noti__item js-item-menu">
@@ -96,29 +94,41 @@
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                            <img src="images/icon/avatar-01.jpg" alt="John Doe" />
+                                            @if(Auth::user()->image)
+                                                <img src="asset('admin/images/default-user-pf.jpg')">
+                                            @else
+                                                 <img src="{{asset('admin/images/default-user-pf.jpg')}}">
+                                            @endif
                                         </div>
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#">Sithu</a>
+                                            <a class="js-acc-btn" href="#">{{Auth::user()->name}}</a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img src="images/icon/avatar-01.jpg" alt="John Doe" />
+                                                    @if(Auth::user()->image)
+                                                        <img src="asset('admin/images/default-user-pf.jpg')">
+                                                    @else
+                                                        <img src="{{asset('admin/images/default-user-pf.jpg')}}">
+                                                    @endif
                                                     </a>
                                                 </div>
                                                 <div class="content">
                                                     <h5 class="name">
-                                                        <a href="#">sithu</a>
+                                                        <a href="#">{{Auth::user()->name}}</a>
                                                     </h5>
-                                                    <span class="email">sithu@example.com</span>
+                                                    <span class="email">{{Auth::user()->email}}</span>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
                                                     <a href="#">
                                                         <i class="zmdi zmdi-account"></i>Account</a>
+                                                </div>
+                                                <div class="account-dropdown__item">
+                                                    <a href="#">
+                                                        <i class="fa-solid fa-key"></i>Change password</a>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__footer">
