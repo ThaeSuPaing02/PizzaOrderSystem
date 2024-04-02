@@ -44,6 +44,13 @@ Route::middleware([
         Route::get('delete/{id}',[CategoryController::class,'delete'])->name('category#delete');
     });
 
+    //admin
+    //change password 
+    Route::group(['prefix'=>'admin','middleware'=>'admin_auth'],function(){
+        Route::get('password/changePage',[AuthController::class,'changePasswordPage'])->name('admin#changePasswordPage');
+        Route::post('password/change',[AuthController::class,'changePassword'])->name('admin#changePassword');
+        });
+
     //user
     //home
     Route::group(['prefix'=>'user','middleware'=>'user_auth'],function(){
