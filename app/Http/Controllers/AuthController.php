@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-
+use Storage;
 class AuthController extends Controller
 {
     //show login page
@@ -71,7 +71,20 @@ class AuthController extends Controller
 
     //edit profile
     public function profileUpdate($id,Request $request){
-        $data = $this->getUserData($request);
+        //dd($request->all());
+        $data = $this->getUserData($request);   
+        //for image
+        if($request->hasFile('image')){
+            $dbImage = User::where('id',$id)->first();
+            $dbImage = $dbImage->image;
+            
+            if($dbImage != null){
+                Storage::delete('public/'.$dbImage);
+            }
+            $fileName = uniqid().$request->file('image')->getClientOriginalName();
+            $request->file('image')->storeAs('public',$fileName);
+            $data['image'] = $fileName;
+        }
         User::where('id',$id)->update($data);
         return redirect()->route('admin#profilePage');   
     }
@@ -83,12 +96,14 @@ class AuthController extends Controller
             'email' => 'required|email|max:255',
             'phone' => 'required|string|max:20',
             'address' => 'required|string|max:255',
+            // 'image'=> 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
         return[
             'name'=>$validatedData['name'],
             'email'=>$validatedData['email'],
             'phone'=>$validatedData['phone'],
             'address'=>$validatedData['address'],
+            // 'image'=>$validatedData['image'],
         ];
     }
     

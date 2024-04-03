@@ -23,7 +23,7 @@
                                 <div class="col-lg-3 mb-4 mb-lg-0 text-center">
                                     <div class="image">
                                             @if(Auth::user()->image)
-                                                <img src="asset('admin/images/default-user-pf.jpg')">
+                                                <img src="{{asset('/storage/'.Auth::user()->image)}}">
                                             @else
                                                  <img src="{{asset('admin/images/default-user-pf.jpg')}}">
                                             @endif

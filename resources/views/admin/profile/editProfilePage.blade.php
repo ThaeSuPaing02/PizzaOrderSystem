@@ -16,25 +16,25 @@
             <div class="row">
                 <div class="col-lg-12 mb-4 mb-sm-5">
                     <div class="card card-style1 border-0">
+                        <form action="{{route('admin#updateProfile',Auth::user()->id)}}" method="POST" enctype="multipart/form-data">
+                            @csrf
                         <div class="card-body p-1-9 p-sm-2-3 p-md-6 p-lg-7">
                             <div class="row align-items-center">
                                 <div class="col-lg-3 mb-4 mb-lg-0 text-center">
                                     <div class="image">
                                         @if(Auth::user()->image)
-                                            <img src="asset('admin/images/default-user-pf.jpg')">
+                                            <img src="{{asset('/storage/'.Auth::user()->image)}}">
                                         @else
                                             <img src="{{asset('admin/images/default-user-pf.jpg')}}">
                                         @endif
                                     </div>
                                     <div class="mb-3">
-                                        <input class="form-control" type="file" id="formFile">
+                                        <input class="form-control" name="image" type="file" id="formFile">
                                     </div>
                                 </div>
                                 <div class="col-lg-6 px-xl-10">
                                     <div class="d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
                                     </div>
-                                    <form action="{{route('admin#updateProfile',Auth::user()->id)}}" method="POST">
-                                        @csrf
                                     <ul class="list-unstyled mt-4 mb-1-9">
                                         <li class="mb-2 mb-xl-3 display-28 row align-items-center">
                                             <span class="col-auto display-26 text-secondary me-2 font-weight-600"><i class="fa-solid fa-user-pen"></i></span>
@@ -58,10 +58,10 @@
                                         </li>
                                     </ul>
                                     <button class="btn btn-success float-right" type="submit">Save Changes</button>
-                                    </form>
                                 </div>
                             </div>
                         </div>
+                    </form>
                     </div>
                 </div>
             </div>
