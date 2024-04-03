@@ -16,7 +16,7 @@
                
             </div>
             
-                <div class="col-lg-12 mb-4 mb-sm-5">
+                <div class="col-lg-12 mb-4 mb-sm-5" id="content">
                     <div class="card card-style1 border-0">
                         <div class="card-body p-1-9 p-sm-2-3 p-md-6 p-lg-7">
                             <div class="row align-items-center">
@@ -28,9 +28,9 @@
                                                  <img src="{{asset('admin/images/default-user-pf.jpg')}}">
                                             @endif
                                         </div>
-                                        <button class="btn btn-success">
+                                        <a href="{{route('admin#profileEditPage')}}" class="btn btn-success" id="loadEditContent">
                                             <i class="fa-solid fa-pen"></i> Edit
-                                        </button>
+                                        </a>
                                 </div>
                                 <div class="col-lg-6 px-xl-10">
                                     <div class="d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
@@ -46,10 +46,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            
+                </div>   
         </div>
     </div>
 </div>
+
 <!-- END MAIN CONTENT-->
 @endsection

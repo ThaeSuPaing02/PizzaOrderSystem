@@ -51,6 +51,8 @@ Route::middleware([
         Route::get('password/changePage',[AuthController::class,'changePasswordPage'])->name('admin#changePasswordPage');
         Route::post('password/change',[AuthController::class,'changePassword'])->name('admin#changePassword');
         Route::get('profilePage',[AuthController::class,'profilePage'])->name('admin#profilePage');
+        Route::get('profile/EditPage',[AuthController::class,'profileEditPage'])->name('admin#profileEditPage');
+        Route::post('profile/edit',[AuthController::class,'profileEdit'])->name('admin#profileEdit');
         });
     //user
     //home
