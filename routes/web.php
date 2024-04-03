@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Middleware\AlrelreadyAuthenticatedMiddleware;
 
@@ -44,6 +45,9 @@ Route::middleware([
         Route::get('delete/{id}',[CategoryController::class,'delete'])->name('category#delete');
     });
 
+    Route::group(['prefix'=>'product','middleware'=>'admin_auth'],function(){
+        Route::get('createPage',[ProductController::class,'createPage'])->name('product#createPage');
+    });
     //admin
     //change password
     //profile 
