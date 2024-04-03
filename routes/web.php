@@ -52,7 +52,7 @@ Route::middleware([
         Route::post('password/change',[AuthController::class,'changePassword'])->name('admin#changePassword');
         Route::get('profilePage',[AuthController::class,'profilePage'])->name('admin#profilePage');
         Route::get('profile/EditPage',[AuthController::class,'profileEditPage'])->name('admin#profileEditPage');
-        Route::post('profile/edit',[AuthController::class,'profileEdit'])->name('admin#profileEdit');
+        Route::post('profile/update/{id}',[AuthController::class,'profileUpdate'])->name('admin#updateProfile');
         });
     //user
     //home

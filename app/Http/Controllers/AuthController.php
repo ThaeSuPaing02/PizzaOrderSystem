@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -69,8 +70,26 @@ class AuthController extends Controller
     }
 
     //edit profile
-    public function profileEdit(Request $request){
-        
+    public function profileUpdate($id,Request $request){
+        $data = $this->getUserData($request);
+        User::where('id',$id)->update($data);
+        return redirect()->route('admin#profilePage');   
+    }
+
+    //private functions
+    private function getUserData($request){
+        $validatedData = $request->validate([
+            'name'=>'required|string|max:255|unique:users,name,'.$request->id,
+            'email' => 'required|email|max:255',
+            'phone' => 'required|string|max:20',
+            'address' => 'required|string|max:255',
+        ]);
+        return[
+            'name'=>$validatedData['name'],
+            'email'=>$validatedData['email'],
+            'phone'=>$validatedData['phone'],
+            'address'=>$validatedData['address'],
+        ];
     }
     
 }

@@ -33,27 +33,28 @@
                                 <div class="col-lg-6 px-xl-10">
                                     <div class="d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
                                     </div>
-                                    <form action="" method="POST">
+                                    <form action="{{route('admin#updateProfile',Auth::user()->id)}}" method="POST">
+                                        @csrf
                                     <ul class="list-unstyled mt-4 mb-1-9">
                                         <li class="mb-2 mb-xl-3 display-28 row align-items-center">
                                             <span class="col-auto display-26 text-secondary me-2 font-weight-600"><i class="fa-solid fa-user-pen"></i></span>
-                                            <input class="col form-control" type="text" value="{{$user['name']}}" aria-label="default input example">
+                                            <input class="col form-control" name="name" type="text" value="{{$user['name']}}" aria-label="default input example" required>
                                         </li>
                                         <li class="mb-2 mb-xl-3 display-28 row align-items-center">
                                             <span class="col-auto display-26 text-secondary me-2 font-weight-600"><i class="fa-solid fa-envelope"></i></span>
-                                            <input class="col form-control" type="email" value="{{$user['email']}}" aria-label="default input example">
+                                            <input class="col form-control" name="email" type="email" value="{{$user['email']}}" aria-label="default input example" required>
                                         </li>
                                         <li class="mb-2 mb-xl-3 display-28 row align-items-center">
                                             <span class="col-auto display-26 text-secondary me-2 font-weight-600"><i class="fa-solid fa-phone"></i></span>
-                                            <input class="col form-control" type="text" value="{{$user['phone']}}" aria-label="default input example">
+                                            <input class="col form-control" name="phone" type="text" value="{{$user['phone']}}" aria-label="default input example" required>
                                         </li>
                                         <li class="mb-2 mb-xl-3 display-28 row align-items-center">
                                             <span class="col-auto display-26 text-secondary me-2 font-weight-600"><i class="fa-solid fa-location-dot"></i></span>
-                                            <input class="col form-control" type="text" value="{{$user['address']}}" aria-label="default input example">
+                                            <input class="col form-control" name="address" type="text" value="{{$user['address']}}" aria-label="default input example" required>
                                         </li>
                                         <li class="mb-2 mb-xl-3 display-28 row align-items-center">
                                             <span class="col-auto display-26 text-secondary me-2 font-weight-600"><i class="fa-solid fa-users"></i></i></span>
-                                            <input class="col form-control" type="text" value="{{$user['role']}}" aria-label="default input example">
+                                            <input class="col form-control" name="role" type="text" value="{{$user['role']}}" aria-label="default input example" disabled>
                                         </li>
                                     </ul>
                                     <button class="btn btn-success float-right" type="submit">Save Changes</button>
