@@ -123,8 +123,8 @@
                                             </div>
                                             <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-account"></i>Account</a>
+                                                    <a href="{{route('admin#profilePage')}}">
+                                                        <i class="fa-regular fa-user"></i>Account</a>
                                                 </div>
                                                 <div class="account-dropdown__item">
                                                 <a href="{{route('admin#changePasswordPage')}}">
@@ -132,9 +132,11 @@
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__footer">
-                                                <a href="{{route('admin#changePasswordPage')}}">
-                                                    <i class="fa-solid fa-right-from-bracket"></i>Logout</a>
-                                                </div>
+                                                <form action="{{route('logout')}}" method="post">
+                                                    <button type="submit">
+                                                        <i class="fa-solid fa-right-from-bracket"></i>Logout</button>
+                                                    </div>
+                                                </form>
                                         </div>
                                     </div>
                                 </div>

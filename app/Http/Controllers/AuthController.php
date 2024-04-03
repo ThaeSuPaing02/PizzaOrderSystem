@@ -55,4 +55,10 @@ class AuthController extends Controller
             return redirect()->back()->withInput()->withErrors(['oldPassword' => 'The old password provided is incorrect']);
         }
     }
+
+    //profile page
+    public function profilePage(){
+        $user = Auth::user();
+        return view('admin.profile.profile',compact('user'));
+    }
 }
