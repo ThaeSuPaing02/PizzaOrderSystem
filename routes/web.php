@@ -48,6 +48,7 @@ Route::middleware([
     Route::group(['prefix'=>'product','middleware'=>'admin_auth'],function(){
         Route::get('createPage',[ProductController::class,'createPage'])->name('product#createPage');
         Route::post('create',[ProductController::class,'create'])->name('product#create');
+        Route::get('list',[ProductController::class,'list'])->name('product#list');
     });
     //admin
     //change password

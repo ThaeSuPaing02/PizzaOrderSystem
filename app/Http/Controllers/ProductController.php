@@ -23,12 +23,24 @@ class ProductController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'price' => 'required|numeric|min:0|max:1000000'
         ]);
+        $fileName = uniqid().$request->file('image')->getClientOriginalName();
+        $request->file('image')->storeAs('public',$fileName);
+        $data['image'] = $fileName;
        //dd($request->all());
        try{
         Product::create($data);
-        return redirect()->route('product#createPage')->with(['message'=>'Product created!']);
+        return redirect()->route('product#list')->with(['message'=>'Product created!']);
        }catch(Exception $e){
             return redirect()->back()->withInput()->withErrors(['error'=>$e->getMessage()]);
        }
+    }
+
+    //product list page
+    public function list(){
+        $products = Product::when(request('key'),function($query){
+            $query->where('name','like','%'.request('key').'%');
+        })->
+        orderBy('id','desc')->paginate(4);
+        return view('admin.products.list',compact('products'));
     }
 }
