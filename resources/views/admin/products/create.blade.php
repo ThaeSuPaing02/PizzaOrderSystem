@@ -24,32 +24,31 @@
                             <h3 class="text-center title-2">Create Product Form</h3>
                         </div>
                         <hr>
-                        <form action="{{route('category#create')}}" method="post">
+                        <form action="{{route('product#create')}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="cc-payment" class="control-label mb-1">Product Name</label>
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected value="">Select the category</option>
+                                <select class="form-select" name="category_id" aria-label="Default select example">
                                     @foreach($categories as $category)
-                                    <option value="{{$category['name']}}">{{$category['name']}}</option>
+                                    <option value="{{$category['id']}}" name="category_id">{{$category['name']}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="cc-payment" class="control-label mb-1">Product Name</label>
-                                <input id="cc-pament" name="name" type="text" class="form-control" aria-required="true" aria-invalid="false" >
+                                <input id="cc-pament" name="name" type="text" class="form-control" aria-required="true" aria-invalid="false" required>
                             </div>
                             <div class="form-group">
                                 <label for="cc-payment" class="control-label mb-1">Product Description</label>
-                                <input id="cc-pament" name="name" type="text" class="form-control" aria-required="true" aria-invalid="false" >
+                                <input id="cc-pament" name="description" type="text" class="form-control" aria-required="true" aria-invalid="false" required>
                             </div>
                             <div class="form-group">
                                 <label for="cc-payment" class="control-label mb-1">Product Price</label>
-                                <input id="cc-pament" name="name" type="number" class="form-control" aria-required="true" aria-invalid="false">
+                                <input id="cc-pament" name="price" type="number" class="form-control" aria-required="true" aria-invalid="false" required>
                             </div>
                             <div class="form-group">
                                 <label for="cc-payment" class="control-label mb-1">Product Image</label>
-                                <input class="form-control" type="file" id="formFile">
+                                <input class="form-control" name="image" type="file" id="formFile" required>
                             </div>
                             <div>
                                 <button id="payment-button" type="submit" class="btn btn-lg mt-1 btn-info btn-block">
@@ -65,5 +64,6 @@
         </div>
     </div>
 </div>
+
 <!-- END MAIN CONTENT-->
 @endsection
